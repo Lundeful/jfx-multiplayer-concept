@@ -1,12 +1,12 @@
 package game;
 
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.sql.Time;
 import java.util.concurrent.TimeUnit;
 
 public class Client implements Runnable {
@@ -27,22 +27,14 @@ public class Client implements Runnable {
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
                 // Stream reader from the socket
                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                // Keyboard input reader
-                BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in))
         ){
-            // Input, output and styling Strings
-            String userInput;
-            Point myMouse;
-            Point otherMouse = new Point(-100,-100);
-            String line;
-            myMouse = MouseInfo.getPointerInfo().getLocation();
 
             while (true) {
                 out.println(p1x);
                 out.println(p1y);
                 p2x = in.read();
                 p2y = in.read();
-                TimeUnit.MILLISECONDS.sleep(50);
+                TimeUnit.SECONDS.sleep(1);
             }
 
         } catch (UnknownHostException e) {

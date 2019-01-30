@@ -4,10 +4,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.TimeUnit;
 
-public class NetworkController {
+public class NetworkController implements Runnable{
     public static void main(String[] args) {
         NetworkController nw = new NetworkController();
-        nw.run();
+        new Thread(nw).start();
     }
     private Socket p1Socket;
     private Socket p2Socket;
@@ -42,15 +42,21 @@ public class NetworkController {
             // game.game.Main server function
             // Send and retrieve coordinates
             while(true){
+                // Get values from both clients
                 this.p1x = p1Handler.getPlayerX();
                 this.p1y = p1Handler.getPlayerY();
-
                 this.p2x = p2Handler.getPlayerX();
                 this.p2y = p2Handler.getPlayerY();
 
+                // Exchange values
+                p1Handler.setEnemyX(p2x);
+                p1Handler.setEnemyY(p2y);
+                p2Handler.setEnemyY(p1x);
+                p2Handler.setEnemyY(p1y);
+
                 System.out.println("P1: " + p1x + " " + p1y);
                 System.out.println("P1: " + p2x + " " + p2y);
-                TimeUnit.MILLISECONDS.sleep(50);
+                TimeUnit.SECONDS.sleep(1);
             }
         } catch (Exception e) {
             e.printStackTrace();

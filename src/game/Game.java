@@ -14,8 +14,6 @@ import java.util.ResourceBundle;
 
 public class Game implements Initializable {
     private int p1x, p1y, p2x, p2y;
-    private double screenHeight;
-    private double screenWidth;
 
     @FXML
     private ImageView p1;
@@ -38,8 +36,6 @@ public class Game implements Initializable {
 
         gc = canvas.getGraphicsContext2D();
         canvas.setFocusTraversable(true);
-        screenHeight = 600;
-        screenWidth = 600;
 
         // Listen for and handle mouse movements
         mouseEventHandler();
@@ -55,9 +51,16 @@ public class Game implements Initializable {
                 // System.out.println(p1x + " " + p1y);
                 player1Ball.setCenterX(p1x);
                 player1Ball.setCenterY(p1y);
+
+                // Send player position
                 client.setP1x(p1x);
                 client.setP1y(p1y);
 
+                // Retrieve enemy position
+                p2x = client.getP2x();
+                p2y = client.getP2y();
+
+                // Place enemy
                 player2Ball.setCenterX(p2x);
                 player2Ball.setCenterY(p2y);
             }

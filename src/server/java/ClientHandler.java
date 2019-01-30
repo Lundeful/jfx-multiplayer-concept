@@ -28,7 +28,8 @@ public class ClientHandler implements Runnable {
     public void run() {
         try {
             // Printer to the socket with charset unavailable in java 8
-            PrintWriter printOut = new PrintWriter(clientSocket.getOutputStream(), true, StandardCharsets.UTF_8);
+            //PrintWriter printOut = new PrintWriter(clientSocket.getOutputStream(), true, StandardCharsets.UTF_8);
+            PrintWriter printOut = new PrintWriter(clientSocket.getOutputStream(), true);
             // Reader to the socket
             BufferedReader br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
@@ -47,7 +48,7 @@ public class ClientHandler implements Runnable {
                 printOut.println(enemyY);
 
                 // Wait a bit
-                TimeUnit.MILLISECONDS.sleep(50);
+                TimeUnit.SECONDS.sleep(1);
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
