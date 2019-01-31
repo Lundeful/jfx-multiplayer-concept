@@ -11,7 +11,7 @@ public class NetworkController implements Runnable{
     }
     private Socket p1Socket;
     private Socket p2Socket;
-    private int p1x, p1y, p2x, p2y; // Player mouse positions
+    private String p1message, p2message;
 
     public void run() {
         int portNumber = 5555;
@@ -39,24 +39,19 @@ public class NetworkController implements Runnable{
             Thread p2Thread = new Thread(p2Handler);
             p2Thread.start();
 
-            // game.game.Main server function
+            // Main server function
             // Send and retrieve coordinates
             while(true){
                 // Get values from both clients
-                this.p1x = p1Handler.getPlayerX();
-                this.p1y = p1Handler.getPlayerY();
-                this.p2x = p2Handler.getPlayerX();
-                this.p2y = p2Handler.getPlayerY();
+                p1message = p1Handler.getPlayerMessage();
+                p2message = p2Handler.getPlayerMessage();
+                p1Handler.setEnemyMessage(p2message);
+                p2Handler.setEnemyMessage(p1message);
 
-                // Exchange values
-                p1Handler.setEnemyX(p2x);
-                p1Handler.setEnemyY(p2y);
-                p2Handler.setEnemyY(p1x);
-                p2Handler.setEnemyY(p1y);
+                //System.out.println("P1 message: " + p1message);
+                //System.out.println("P2 message: " + p2message);
 
-                System.out.println("P1: " + p1x + " " + p1y);
-                System.out.println("P1: " + p2x + " " + p2y);
-                TimeUnit.SECONDS.sleep(1);
+                TimeUnit.MILLISECONDS.sleep(10);
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -6,35 +6,45 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.sql.Time;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Client implements Runnable {
-    private int p1x;
-    private int p1y;
-    private int p2x;
-    private int p2y;
+    private String playerMessage, enemyMessage;
+
+    private BufferedReader br;
+    private PrintWriter out;
+    private boolean ready = false;
+    Socket clientSocket;
+
 
     @Override
     public void run() {
-        String hostName = "127.0.0.1";
+        String hostName;
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter server IP address or press enter to use 127.0.0.1");
+        String input = sc.nextLine();
+
+        if (input.equals("")) hostName = input;
+        else hostName = "127.0.0.1";
+
         int portNumber = 5555; // Default port
 
-        try(
+        try{
                 // create TCP socket for the given hostName, remote port PortNumber
-                Socket clientSocket = new Socket(hostName, portNumber);
+                clientSocket = new Socket(hostName, portNumber);
                 // Stream writer to the socket
-                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+                out = new PrintWriter(clientSocket.getOutputStream(), true);
                 // Stream reader from the socket
-                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        ){
+                br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
+                // Ready to roll
+                ready = true;
             while (true) {
-                out.println(p1x);
-                out.println(p1y);
-                p2x = in.read();
-                p2y = in.read();
-                TimeUnit.SECONDS.sleep(1);
+                out.println(playerMessage);
+                enemyMessage = br.readLine();
+                TimeUnit.MILLISECONDS.sleep(10);
             }
 
         } catch (UnknownHostException e) {
@@ -48,35 +58,15 @@ public class Client implements Runnable {
         }
     }
 
-    public int getP1x() {
-        return p1x;
+    public void setPlayerMessage(String playerMessage) {
+        this.playerMessage = playerMessage;
     }
 
-    public int getP1y() {
-        return p1x;
+    public String getEnemyMessage() {
+        return enemyMessage;
     }
 
-    public int getP2x() {
-        return p2x;
-    }
-
-    public int getP2y() {
-        return p2y;
-    }
-
-    public void setP1x(int p1x) {
-        this.p1x = p1x;
-    }
-
-    public void setP1y(int p1y) {
-        this.p1y = p1y;
-    }
-
-    public void setP2x(int p2x) {
-        this.p2x = p2x;
-    }
-
-    public void setP2y(int p2y) {
-        this.p2y = p2y;
+    public boolean isReady() {
+        return ready;
     }
 }
