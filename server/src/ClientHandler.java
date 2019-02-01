@@ -1,5 +1,3 @@
-package server.java;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -24,7 +22,7 @@ public class ClientHandler implements Runnable {
             // Reader to the socket
             BufferedReader br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-            // game.game.Client IP address and port
+            // client.client.client.Client IP address and port
             InetAddress clientAddr = clientSocket.getInetAddress();
             int clientPort = clientSocket.getPort();
 

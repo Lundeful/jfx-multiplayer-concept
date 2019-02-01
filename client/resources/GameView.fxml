@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 
-<AnchorPane fx:id="ap" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.Game">
+<AnchorPane fx:id="ap" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game">
    <children>
       <Circle fx:id="player1Ball" fill="DODGERBLUE" layoutX="0" layoutY="0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="player2Ball" fill="RED" layoutX="0" layoutY="0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />

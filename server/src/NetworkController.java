@@ -1,5 +1,3 @@
-package server.java;
-
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.TimeUnit;
@@ -39,7 +37,7 @@ public class NetworkController implements Runnable{
             Thread p2Thread = new Thread(p2Handler);
             p2Thread.start();
 
-            // Main server function
+            // client.Main server function
             // Send and retrieve coordinates
             while(true){
                 // Get values from both clients
