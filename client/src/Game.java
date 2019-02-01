@@ -57,6 +57,7 @@ public class Game implements Initializable {
                     client.setPlayerMessage(playerMessage);
                     enemyMessage = client.getEnemyMessage();
 
+                    // Parse string to p2 coordinates
                     p2Array = enemyMessage.split(",");
                     p2x = Integer.parseInt(p2Array[0]);
                     p2y = Integer.parseInt(p2Array[1]);
@@ -69,10 +70,9 @@ public class Game implements Initializable {
                     player2Ball.setCenterX(p2x);
                     player2Ball.setCenterY(p2y);
 
-                    //System.out.println("Player: " + playerMessage);
-                    //System.out.println("Enemy: " + enemyMessage);
+
                 } catch (Exception e) {
-                    //System.err.println("Exception here, I don't care");
+                    // e.printStackTrace();
                 }
             }
         };

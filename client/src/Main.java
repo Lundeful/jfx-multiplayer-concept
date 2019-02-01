@@ -5,8 +5,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-@SuppressWarnings("Not found?"
-)
 public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
